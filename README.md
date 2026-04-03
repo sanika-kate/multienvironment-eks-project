@@ -189,16 +189,4 @@ helm upgrade --install myapp ./my-app -f env/prod-values.yaml -n prod
 
 ---
 
-# 👩‍💻 Author
-
-**Sanika Kate**
-DevOps & Cloud Enthusiast
-
----
-
-# ⭐ Final Note
-
-This project demonstrates a **complete DevOps lifecycle** — from development to deployment — using modern tools and best practices.
-
-👉 It reflects real-world production architecture and hands-on DevOps expertise.
 
