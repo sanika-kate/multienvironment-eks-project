@@ -1,0 +1,11 @@
+backend:
+  replicaCount: 2
+  image:
+    repository: sanikakate2002/backend
+    tag: staging
+
+frontend:
+  replicaCount: 2
+  image:
+    repository: sanikakate2002/frontend
+    tag: staging

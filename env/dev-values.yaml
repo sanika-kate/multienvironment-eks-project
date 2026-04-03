@@ -1,0 +1,11 @@
+backend:
+  replicaCount: 1
+  image:
+    repository: sanikakate2002/backend
+    tag: dev
+
+frontend:
+  replicaCount: 1
+  image:
+    repository: sanikakate2002/frontend
+    tag: dev

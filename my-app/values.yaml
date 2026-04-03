@@ -1,0 +1,82 @@
+backend:
+  name: backend-deployment
+  replicaCount: 1
+  containerPort: 8080
+
+  image:
+    repository: sanikakate2002/backend
+    tag: dev   # default (overridden by Jenkins)
+
+  service:
+    name: backend-service
+    type: ClusterIP
+    port: 80
+    targetPort: 8080
+
+  configMapName: backend-config
+  secretName: db-secret
+
+  config:
+    SPRING_DATASOURCE_URL: jdbc:mariadb://database-1.cx0g4sye0xfn.us-east-2.rds.amazonaws.com:3306/student_db?sslMode=trust
+
+  secret:
+    username: YWRtaW4=
+    password: c2FuaWthMjczMTEy
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "256Mi"
+    limits:
+      cpu: "300m"
+      memory: "512Mi"
+
+
+frontend:
+  name: frontend-deployment
+  replicaCount: 2
+  containerPort: 80
+
+  image:
+    repository: sanikakate2002/frontend
+    tag: dev   # default (overridden by Jenkins)
+
+  imagePullPolicy: Always
+
+  service:
+    name: frontend-service
+    type: ClusterIP
+    port: 80
+    targetPort: 80
+
+  strategy:
+    type: RollingUpdate
+    maxUnavailable: 1
+    maxSurge: 1
+
+  resources:
+    requests:
+      memory: "128Mi"
+      cpu: "150m"
+    limits:
+      memory: "256Mi"
+      cpu: "300m"
+
+  livenessProbe:
+    path: /
+    initialDelaySeconds: 20
+    periodSeconds: 10
+
+  readinessProbe:
+    path: /
+    initialDelaySeconds: 10
+    periodSeconds: 5
+
+
+ingress:
+  name: app-ingress
+  className: nginx
+  host: dev.myapp.local   # ✅ DEFAULT (important)
+  frontendPath: /
+  backendPath: /api
+  

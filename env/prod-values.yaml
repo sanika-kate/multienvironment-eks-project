@@ -1,0 +1,11 @@
+backend:
+  replicaCount: 3
+  image:
+    repository: sanikakate2002/backend
+    tag: prod
+
+frontend:
+  replicaCount: 3
+  image:
+    repository: sanikakate2002/frontend
+    tag: prod
